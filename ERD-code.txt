@@ -1,0 +1,53 @@
+Table aircrafts {
+  id integer [primary key]
+  total_seats integer
+  name varchar(30)
+}
+
+Table flights {
+  id integer [primary key]
+  flight_number varchar(10)
+  mileage integer
+  aircraft_id integer [not null, ref: > aircrafts.id]
+}
+
+Table customers {
+  id integer [primary key]
+  status varchar(10)
+  total_mileage integer
+}
+
+Table bookings {
+  id integer [primary key]
+  customer_id integer [not null, ref: > customers.id]
+  flight_number varchar(10) [not null, ref: > flights.flight_number]
+}
+
+
+Records aircrafts(id, total_seats, name) {
+  1, 180, 'Boeing 737'
+  2, 320, 'Airbus A320'
+  3, 416, 'Boeing 747'
+}
+
+Records flights(id, flight_number, mileage, aircraft_id) {
+  1, 'AA101', 2475, 1
+  2, 'BA202', 5541, 2
+  3, 'EK303', 3102, 3
+  4, 'AA104', 1200, 1
+}
+
+Records customers(id, status, total_mileage) {
+  1, 'gold', 45200
+  2, 'silver', 12800
+  3, 'bronze', 3100
+  4, 'bronze', 870
+}
+
+Records bookings(id, customer_id, flight_number) {
+  1, 1, 'AA101'
+  2, 2, 'BA202'
+  3, 3, 'AA101'
+  4, 1, 'EK303'
+  5, 4, 'AA104'
+}
